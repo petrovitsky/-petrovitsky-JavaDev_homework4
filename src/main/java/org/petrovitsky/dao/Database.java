@@ -3,12 +3,11 @@ package org.petrovitsky.dao;
 import java.sql.*;
 
 public class Database {
-    private static final String CONNECTION_URL = "jdbc:h2:./homework4";
+    private static final String CONNECTION_URL = "jdbc:h2:./homework4;TRACE_LEVEL_SYSTEM_OUT=3";
     private static final Database INSTANCE = new Database();
     private Connection connection;
 
     private Database() {
-
         try {
             connection = DriverManager.getConnection(CONNECTION_URL);
         } catch (SQLException e) {

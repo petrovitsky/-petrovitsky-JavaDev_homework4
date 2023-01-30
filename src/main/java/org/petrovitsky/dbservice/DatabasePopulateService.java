@@ -11,9 +11,8 @@ import java.sql.SQLException;
 public class DatabasePopulateService {
     public static void main(String[] args) {
         String initDbUrl = "C:/Users/epetr/eclipse-workspace/JavaDev/Homework4/JavaDev_homework4/sql/populate_db.sql";
-        try {
+        try (Connection connection = Database.getInstance().getConnection()) {
             String sql = Files.readString(Path.of(initDbUrl));
-            Connection connection = Database.getInstance().getConnection();
             connection.createStatement().executeUpdate(sql);
         } catch (IOException | SQLException e) {
             e.printStackTrace();

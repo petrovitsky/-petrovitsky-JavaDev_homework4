@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseQueryService {
+    private Database db = Database.getInstance();
 
     public List<MaxProjectCountClient> findMaxProjectsClient() throws SQLException, IOException {
-
         String queryUrl = "C:/Users/epetr/eclipse-workspace/JavaDev/Homework4/JavaDev_homework4/sql/find_max_projects_client.sql";
         String sql = Files.readString(Path.of(queryUrl));
-        Statement statement = Database.getInstance().getConnection().createStatement();
+        Statement statement = db.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         List<MaxProjectCountClient> result = new ArrayList<>();
         while (resultSet.next()) {
@@ -27,7 +27,7 @@ public class DatabaseQueryService {
                     resultSet.getInt("project_count")
             ));
         }
-        statement.close();
+        db.close();
         return result;
     }
 
@@ -35,7 +35,7 @@ public class DatabaseQueryService {
     public List<LongestProject> findlongestProject() throws IOException, SQLException {
         String queryUrl = "C:/Users/epetr/eclipse-workspace/JavaDev/Homework4/JavaDev_homework4/sql/find_longest_project.sql";
         String sql = Files.readString(Path.of(queryUrl));
-        Statement statement = Database.getInstance().getConnection().createStatement();
+        Statement statement = db.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         List<LongestProject> result = new ArrayList<>();
         while (resultSet.next()) {
@@ -44,7 +44,7 @@ public class DatabaseQueryService {
                     resultSet.getInt("month_count")
             ));
         }
-        statement.close();
+        db.close();
         return result;
     }
 
@@ -52,7 +52,7 @@ public class DatabaseQueryService {
     public List<MaxSalary> finaMaxSalary() throws IOException, SQLException {
         String queryUrl = "C:/Users/epetr/eclipse-workspace/JavaDev/Homework4/JavaDev_homework4/sql/find_max_salary_worker.sql";
         String sql = Files.readString(Path.of(queryUrl));
-        Statement statement = Database.getInstance().getConnection().createStatement();
+        Statement statement = db.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         List<MaxSalary> result = new ArrayList<>();
         while (resultSet.next()) {
@@ -61,14 +61,14 @@ public class DatabaseQueryService {
                     resultSet.getInt("salary")
             ));
         }
-        statement.close();
+        db.close();
         return result;
     }
 
     public List<YoungestOldestWorker> findYoungestOldestWorker() throws IOException, SQLException {
         String queryUrl = "C:/Users/epetr/eclipse-workspace/JavaDev/Homework4/JavaDev_homework4/sql/find_youngest_eldest_workers.sql";
         String sql = Files.readString(Path.of(queryUrl));
-        Statement statement = Database.getInstance().getConnection().createStatement();
+        Statement statement = db.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         List<YoungestOldestWorker> result = new ArrayList<>();
         while (resultSet.next()) {
@@ -78,14 +78,14 @@ public class DatabaseQueryService {
                     LocalDate.parse(resultSet.getNString("birthday"))
             ));
         }
-        statement.close();
+        db.close();
         return result;
     }
 
     public List<ProjectCosts> getAllProjectswithCosts() throws IOException, SQLException {
         String queryUrl = "C:/Users/epetr/eclipse-workspace/JavaDev/Homework4/JavaDev_homework4/sql/print_project_prices.sql";
         String sql = Files.readString(Path.of(queryUrl));
-        Statement statement = Database.getInstance().getConnection().createStatement();
+        Statement statement = db.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         List<ProjectCosts> result = new ArrayList<>();
         while (resultSet.next()) {
@@ -94,7 +94,7 @@ public class DatabaseQueryService {
                     resultSet.getInt("price")
             ));
         }
-        statement.close();
+        db.close();
         return result;
     }
 
